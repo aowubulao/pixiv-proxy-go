@@ -25,6 +25,11 @@ func init() {
 
 func PixivImageProxy(resp http.ResponseWriter, req *http.Request) {
 	var uri = req.RequestURI
+	uri = utils.VerifyRequest(uri)
+	if uri == "" {
+		utils.BuildOk(resp)
+		return
+	}
 	if !strings.HasPrefix(uri, "/proxy") {
 		utils.BuildOk(resp)
 		return
